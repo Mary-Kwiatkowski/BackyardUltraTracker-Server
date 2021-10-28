@@ -1,7 +1,7 @@
-const UserType = require('./TypeDefs/UserType');
+const UserType = require("./TypeDefs/UserType");
 
-const userData = require('../byudata.json');
-const graphql = require('graphql');
+const userData = require("../byudata.json");
+const graphql = require("graphql");
 const {
   GraphQLObjectType,
   GraphQLSchema,
@@ -12,7 +12,7 @@ const {
 } = graphql;
 
 const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+  name: "RootQueryType",
   fields: {
     getAllUsers: {
       type: new GraphQLList(UserType),
@@ -24,7 +24,7 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 const Mutation = new GraphQLObjectType({
-  name: 'Mutation',
+  name: "Mutation",
   fields: {
     createUser: {
       type: UserType,
