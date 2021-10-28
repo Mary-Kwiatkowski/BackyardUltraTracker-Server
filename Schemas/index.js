@@ -1,21 +1,20 @@
-const UserType = require('./TypeDefs/UserType');
+const Participant = require("./TypeDefs/Participant");
 
-const userData = require('../byudata.json');
-const graphql = require('graphql');
+const userData = require("../byudata.json");
+const graphql = require("graphql");
 const {
   GraphQLObjectType,
   GraphQLSchema,
-  GraphQLBoolean,
   GraphQLList,
   GraphQLInt,
   GraphQLString,
 } = graphql;
 
 const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+  name: "RootQueryType",
   fields: {
     getAllUsers: {
-      type: new GraphQLList(UserType),
+      type: new GraphQLList(Participant),
       args: { age: { type: GraphQLInt } },
       resolve(parent, args) {
         return userData;
@@ -24,19 +23,17 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 const Mutation = new GraphQLObjectType({
-  name: 'Mutation',
+  name: "Mutation",
   fields: {
     createUser: {
-      type: UserType,
+      type: Participant,
       args: {
         firstName: { type: GraphQLString },
         lastName: { type: GraphQLString },
         gender: { type: GraphQLString },
         age: { type: GraphQLInt },
-        checkedIn: { type: GraphQLBoolean },
-        shirtSize: { type: GraphQLString },
-        state: { type: GraphQLString },
         yards: { type: GraphQLInt },
+        status: { type: GraphQLString },
       },
       resolve(parent, args) {
         userData.push({
@@ -45,10 +42,8 @@ const Mutation = new GraphQLObjectType({
           lastName: args.lastName,
           gender: args.gender,
           age: args.age,
-          checkedIn: args.checkedIn,
-          shirtSize: args.shirtSize,
-          state: args.state,
           yards: args.yards,
+          status: args.status,
         });
         return args;
       },
